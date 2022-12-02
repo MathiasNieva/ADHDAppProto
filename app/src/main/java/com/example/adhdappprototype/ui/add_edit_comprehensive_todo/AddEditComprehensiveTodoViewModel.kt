@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adhdappprototype.data.ComprehensiveTodo
 import com.example.adhdappprototype.data.Repository
+import com.example.adhdappprototype.data.util.Priority
+import com.example.adhdappprototype.data.util.Tag
 import com.example.adhdappprototype.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -30,6 +32,12 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
     var description by mutableStateOf("")
         private set
 
+    var tag by mutableStateOf<Tag?>(null)
+        private set
+
+    var priority by mutableStateOf<Priority?>(null)
+        private set
+
     private val _uiEvent =  Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -40,6 +48,8 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
                 repository.getTodoById(todoId)?.let { todo ->
                     title = todo.title
                     description = todo.description ?: ""
+                    tag = todo.tag
+                    priority = todo.priority
                     this@AddEditComprehensiveTodoViewModel.todo = todo
                 }
             }
@@ -54,6 +64,12 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
             is AddEditComprehensiveTodoEvent.OnDescriptionChange -> {
                 description = event.description
             }
+            is AddEditComprehensiveTodoEvent.OnTagChange -> {
+                tag = event.tag
+            }
+            is AddEditComprehensiveTodoEvent.OnPriorityChange -> {
+                priority = event.priority
+            }
             is AddEditComprehensiveTodoEvent.OnSaveTodoClick -> {
                 viewModelScope.launch {
                     if(title.isBlank()) {
@@ -66,6 +82,8 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
                         ComprehensiveTodo(
                             title = title,
                             description = description,
+                            tag = tag,
+                            priority = priority,
                             isDone = todo?.isDone ?: false,
                             id = todo?.id
                         )

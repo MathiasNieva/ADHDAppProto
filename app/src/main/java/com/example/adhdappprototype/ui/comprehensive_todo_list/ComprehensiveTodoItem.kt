@@ -51,6 +51,18 @@ fun ComprehensiveTodoItem(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = it)
             }
+            todo.tag?.string.let {
+                Spacer(modifier = Modifier.height(4.dp))
+                if (it != null) {
+                    Text(text = it)
+                }
+            }
+            todo.priority?.string.let {
+                Spacer(modifier = Modifier.height(4.dp))
+                if (it != null) {
+                    Text(text = it)
+                }
+            }
         }
         Checkbox(
             checked = todo.isDone,

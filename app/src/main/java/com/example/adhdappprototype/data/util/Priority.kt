@@ -4,7 +4,7 @@ import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
 
 enum class Priority (val string: String, val color: Color) {
-    LOW("School", Color.Green),
-    MEDIUM("House", Color.Yellow),
-    HIGH("Health", Color.Red)
+    LOW("Low", Color.Green),
+    MEDIUM("Medium", Color.Yellow),
+    HIGH("High", Color.Red)
 }
