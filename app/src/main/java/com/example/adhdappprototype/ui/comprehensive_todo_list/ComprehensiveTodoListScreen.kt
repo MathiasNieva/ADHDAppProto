@@ -1,5 +1,6 @@
 package com.example.adhdappprototype.ui.comprehensive_todo_list
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -102,7 +106,18 @@ fun ComprehensiveTodoListScreen(
                         .clickable {
                             viewModel.onEvent(ComprehensiveTodoListEvent.OnTodoClick(todo))
                         }
+                        .drawBehind {
+                            val borderSize = 1.dp.toPx()
+                            val y = size.height + borderSize / 2
+                            drawLine(
+                                color = Color.Black,
+                                start = Offset(0f, y),
+                                end = Offset(size.width, y),
+                                strokeWidth = borderSize
+                            )
+                        }
                         .padding(16.dp)
+
                 )
             }
         }
