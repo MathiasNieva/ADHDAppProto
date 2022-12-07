@@ -95,7 +95,9 @@ fun ComprehensiveTodoListScreen(
         }
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 90.dp)
         ) {
             items(todos.value) { todo ->
                 ComprehensiveTodoItem(
