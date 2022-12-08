@@ -10,11 +10,13 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.adhdappprototype.data.ComprehensiveTodo
 import com.example.adhdappprototype.data.daily_todo.DailyTodo
+import com.example.adhdappprototype.ui.components.TagContainer
 import com.example.adhdappprototype.ui.comprehensive_todo_list.ComprehensiveTodoListEvent
 
 @Composable
@@ -49,11 +51,25 @@ fun DailyTodoItem(
                     )
                 }
             }
-            todo.description?.let {
-                Spacer(modifier = Modifier.height(8.dp))
+            todo.timeFrame?.let {
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(text = it)
             }
         }
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            todo.tag?.let {
+                TagContainer(string = it.string, surfaceColor = Color.Magenta, textColor = Color.White)
+            }
+
+            todo.priority?.let {
+                Spacer(modifier = Modifier.height(8.dp))
+                TagContainer(string = it.string, surfaceColor = it.color, textColor = Color.DarkGray)
+            }
+        }
+        Spacer(modifier = Modifier.width(8.dp))
         Checkbox(
             checked = todo.isDone,
             onCheckedChange = { isChecked ->
