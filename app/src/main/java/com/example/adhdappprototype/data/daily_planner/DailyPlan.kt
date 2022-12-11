@@ -9,7 +9,7 @@ import com.example.adhdappprototype.data.util.Tag
 data class DailyPlan(
     val title: String,
     val description: String?,
-    val time: String?,
+    val time: String,
     val isDone: Boolean,
     val tag: Tag?,
     val priority: Priority?,

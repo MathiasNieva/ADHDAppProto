@@ -52,7 +52,7 @@ fun DailyTodoItem(
                 }
             }
             todo.timeFrame?.let {
-                if (todo.description != "") {
+                if (todo.timeFrame != "") {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = it)
                 }

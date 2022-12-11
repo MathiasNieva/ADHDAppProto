@@ -61,7 +61,7 @@ class AddEditPlanViewModel @Inject constructor(
                     tag = todo.tag
                     priority = todo.priority
                     ifThenPlan = todo.ifThenPlan ?: ""
-                    time = todo.time ?: ""
+                    time = todo.time
                     this@AddEditPlanViewModel.todo = todo
                 }
             }
