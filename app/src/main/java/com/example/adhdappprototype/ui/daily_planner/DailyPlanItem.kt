@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,13 +31,26 @@ fun DailyPlanItem(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box() {
+        Box(
+            modifier = Modifier.drawBehind {
+                val borderSize = 1.dp.toPx()
+                val x = size.width + borderSize / 2
+                drawLine(
+                    color = Color.Black,
+                    start = Offset(x, -29.dp.toPx()),
+                    end = Offset(x, 52.dp.toPx()),
+                    strokeWidth = borderSize
+                )
+                }
+                .padding(end = 10.dp)
+        ) {
             Text(
                 text = todo.time
             )
         }
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1f)
+                .padding(start = 10.dp),
             verticalArrangement = Arrangement.Center
         ) {
             Row(
