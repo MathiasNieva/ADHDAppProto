@@ -1,5 +1,6 @@
 package com.example.adhdappprototype.ui.daily_todo_list.add_edit_daily_todo
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -14,6 +15,7 @@ import com.example.adhdappprototype.ui.add_edit_comprehensive_todo.AddEditCompre
 import com.example.adhdappprototype.ui.add_edit_comprehensive_todo.AddEditComprehensiveTodoViewModel
 import com.example.adhdappprototype.util.UiEvent
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddEditDailyTodoScreen(

@@ -1,5 +1,6 @@
 package com.example.adhdappprototype.ui.comprehensive_todo_list
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,7 @@ import com.example.adhdappprototype.ui.BottomNavItem
 import com.example.adhdappprototype.util.Routes
 import com.example.adhdappprototype.util.UiEvent
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ComprehensiveTodoListScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,

@@ -38,6 +38,12 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
     var priority by mutableStateOf<Priority?>(null)
         private set
 
+    var reminderDate by mutableStateOf("")
+        private set
+
+    var reminderTime by mutableStateOf("")
+        private set
+
     private val _uiEvent =  Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -50,6 +56,8 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
                     description = todo.description ?: ""
                     tag = todo.tag
                     priority = todo.priority
+                    reminderDate = todo.reminderDate ?: ""
+                    reminderTime = todo.reminderTime ?: ""
                     this@AddEditComprehensiveTodoViewModel.todo = todo
                 }
             }
@@ -70,6 +78,12 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
             is AddEditComprehensiveTodoEvent.OnPriorityChange -> {
                 priority = event.priority
             }
+            is AddEditComprehensiveTodoEvent.OnReminderDate -> {
+                reminderDate = event.reminderDate
+            }
+            is AddEditComprehensiveTodoEvent.OnReminderTime -> {
+                reminderTime = event.reminderTime
+            }
             is AddEditComprehensiveTodoEvent.OnSaveTodoClick -> {
                 viewModelScope.launch {
                     if(title.isBlank()) {
@@ -84,6 +98,8 @@ class AddEditComprehensiveTodoViewModel @Inject constructor(
                             description = description,
                             tag = tag,
                             priority = priority,
+                            reminderDate = reminderDate,
+                            reminderTime = reminderTime,
                             isDone = todo?.isDone ?: false,
                             id = todo?.id
                         )

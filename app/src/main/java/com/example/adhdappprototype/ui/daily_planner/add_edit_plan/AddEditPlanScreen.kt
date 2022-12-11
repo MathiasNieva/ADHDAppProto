@@ -1,5 +1,6 @@
 package com.example.adhdappprototype.ui.daily_planner.add_edit_plan
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,6 +14,7 @@ import com.example.adhdappprototype.ui.add_edit_comprehensive_todo.AddEditCompre
 import com.example.adhdappprototype.ui.add_edit_comprehensive_todo.AddEditComprehensiveTodoViewModel
 import com.example.adhdappprototype.util.UiEvent
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddEditPlanScreen(
     onPopBackStack: () -> Unit,

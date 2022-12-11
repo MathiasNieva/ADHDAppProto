@@ -1,5 +1,6 @@
 package com.example.adhdappprototype.ui.daily_planner
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import com.example.adhdappprototype.ui.comprehensive_todo_list.ComprehensiveTodo
 import com.example.adhdappprototype.util.Routes
 import com.example.adhdappprototype.util.UiEvent
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DailyPlannerScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,

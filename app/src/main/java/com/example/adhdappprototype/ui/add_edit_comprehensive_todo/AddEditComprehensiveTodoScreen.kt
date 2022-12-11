@@ -1,17 +1,29 @@
 package com.example.adhdappprototype.ui.add_edit_comprehensive_todo
 
+import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.adhdappprototype.data.util.Priority
 import com.example.adhdappprototype.data.util.Tag
 import com.example.adhdappprototype.util.UiEvent
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.datetime.time.timepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddEditComprehensiveTodoScreen(
@@ -21,6 +33,30 @@ fun AddEditComprehensiveTodoScreen(
     val scaffoldState = rememberScaffoldState()
     var expandedTag by remember { mutableStateOf(false) }
     var expandedPriority by remember { mutableStateOf(false) }
+
+    var pickedDate by remember {
+        mutableStateOf(LocalDate.now())
+    }
+    var pickedTime by remember {
+        mutableStateOf(LocalTime.NOON)
+    }
+    val formattedDate by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("MMM dd")
+                .format(pickedDate)
+        }
+    }
+    val formattedTime by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("HH:mm")
+                .format(pickedTime)
+        }
+    }
+
+    val dateDialogState = rememberMaterialDialogState()
+    val timeDialogState = rememberMaterialDialogState()
 
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
@@ -78,6 +114,7 @@ fun AddEditComprehensiveTodoScreen(
                 singleLine = false,
                 maxLines = 5
             )
+            // Dropdown menu for tag -----------------------------------------------
             Spacer(modifier = Modifier.height(8.dp))
             ExposedDropdownMenuBox(
                 expanded = expandedTag,
@@ -136,6 +173,7 @@ fun AddEditComprehensiveTodoScreen(
                     }
                 }
             }
+            // Dropdown menu for priority--------------------------------------------------
             Spacer(modifier = Modifier.height(8.dp))
             ExposedDropdownMenuBox(
                 expanded = expandedPriority,
@@ -192,6 +230,58 @@ fun AddEditComprehensiveTodoScreen(
                             Text(text = selectionOption.string)
                         }
                     }
+                }
+            }
+            // Date picker ----------------------------------------------------------------
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = { dateDialogState.show() }
+                ) {
+                    Text(text = "Set up reminder")
+                }
+                Text(
+                    modifier = Modifier.fillMaxWidth()
+                        .wrapContentWidth(Alignment.CenterHorizontally),
+                    text = viewModel.reminderDate + ", " + viewModel.reminderTime
+                )
+            }
+            MaterialDialog(
+                dialogState = dateDialogState,
+                buttons = {
+                    positiveButton(text = "Ok") {
+                        timeDialogState.show()
+                    }
+                    negativeButton(text = "Cancel")
+                }
+            ) {
+                datepicker(
+                    initialDate = LocalDate.now(),
+                    title = "Pick a date"
+                ) {
+                    pickedDate = it
+                }
+            }
+            // Time picker ----------------------------------------------------------------
+            MaterialDialog(
+                dialogState = timeDialogState,
+                buttons = {
+                    positiveButton(text = "Ok") {
+                        viewModel.onEvent(AddEditComprehensiveTodoEvent.OnReminderDate(formattedDate))
+                        viewModel.onEvent(AddEditComprehensiveTodoEvent.OnReminderTime(formattedTime))
+                    }
+                    negativeButton(text = "Cancel")
+                }
+            ) {
+                timepicker(
+                    initialTime = LocalTime.NOON,
+                    title = "Pick a time",
+                    is24HourClock = true
+                ) {
+                    pickedTime  = it
                 }
             }
         }

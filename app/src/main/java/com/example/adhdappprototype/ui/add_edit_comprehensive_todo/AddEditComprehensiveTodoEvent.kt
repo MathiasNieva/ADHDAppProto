@@ -8,5 +8,7 @@ sealed class AddEditComprehensiveTodoEvent {
     data class OnDescriptionChange(val description: String): AddEditComprehensiveTodoEvent()
     data class OnTagChange(val tag: Tag): AddEditComprehensiveTodoEvent()
     data class OnPriorityChange(val priority: Priority): AddEditComprehensiveTodoEvent()
+    data class OnReminderDate(val reminderDate: String): AddEditComprehensiveTodoEvent()
+    data class OnReminderTime(val reminderTime: String): AddEditComprehensiveTodoEvent()
     object OnSaveTodoClick: AddEditComprehensiveTodoEvent()
 }

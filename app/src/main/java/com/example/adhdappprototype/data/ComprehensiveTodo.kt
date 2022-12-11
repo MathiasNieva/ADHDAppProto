@@ -13,5 +13,7 @@ data class ComprehensiveTodo(
     val isDone: Boolean,
     val tag: Tag?,
     val priority: Priority?,
+    val reminderDate: String?,
+    val reminderTime: String?,
     @PrimaryKey val id: Int? = null
 )
