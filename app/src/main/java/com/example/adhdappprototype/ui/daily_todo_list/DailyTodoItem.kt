@@ -52,8 +52,10 @@ fun DailyTodoItem(
                 }
             }
             todo.timeFrame?.let {
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(text = it)
+                if (todo.description != "") {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = it)
+                }
             }
         }
         Column(

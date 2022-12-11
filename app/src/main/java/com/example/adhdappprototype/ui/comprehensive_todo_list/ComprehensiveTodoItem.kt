@@ -52,8 +52,10 @@ fun ComprehensiveTodoItem(
                 }
             }
             todo.description?.let {
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = it)
+                if (todo.description != "") {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = it)
+                }
             }
         }
 
