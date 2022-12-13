@@ -9,6 +9,8 @@ import com.example.adhdappprototype.data.daily_planner.DailyPlanRepository
 import com.example.adhdappprototype.data.daily_planner.DailyPlanRepositoryImpl
 import com.example.adhdappprototype.data.daily_todo.DailyTodoRepository
 import com.example.adhdappprototype.data.daily_todo.DailyTodoRepositoryImpl
+import com.example.adhdappprototype.data.settings.SettingsRepository
+import com.example.adhdappprototype.data.settings.SettingsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,5 +47,11 @@ object AppModule {
     @Singleton
     fun provideDailyPlanRepository(db: Database): DailyPlanRepository {
         return DailyPlanRepositoryImpl(db.dailyPlanDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingsRepository(db: Database): SettingsRepository {
+        return SettingsRepositoryImpl(db.settingsDao)
     }
 }

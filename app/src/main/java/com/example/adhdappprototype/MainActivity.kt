@@ -1,5 +1,6 @@
 package com.example.adhdappprototype
 
+import android.annotation.SuppressLint
 import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -34,12 +35,15 @@ import com.example.adhdappprototype.ui.daily_planner.DailyPlannerScreen
 import com.example.adhdappprototype.ui.daily_planner.add_edit_plan.AddEditPlanScreen
 import com.example.adhdappprototype.ui.daily_todo_list.DailyTodoListScreen
 import com.example.adhdappprototype.ui.daily_todo_list.add_edit_daily_todo.AddEditDailyTodoScreen
+import com.example.adhdappprototype.ui.settings.SettingsItem
+import com.example.adhdappprototype.ui.settings.SettingsScreen
 import com.example.adhdappprototype.ui.theme.ADHDAppPrototypeTheme
 import com.example.adhdappprototype.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -121,8 +125,18 @@ fun Navigation(navController: NavHostController) {
                 navController.popBackStack()
             })
         }
-        composable("settings") {
-            SettingsScreen()
+        composable(Routes.SETTINGS) {
+            SettingsScreen(
+                onNavigate = {
+                    navController.navigate(it.route)
+                },
+                navController = navController
+            )
+        }
+        composable(Routes.EDIT_SETTINGS) {
+            SettingsItem(onPopBackStack = {
+                navController.popBackStack()
+            })
         }
     }
 }
@@ -161,16 +175,6 @@ fun BottomNavigationBar(
                 }
             )
         }
-    }
-}
-
-@Composable
-fun SettingsScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Settings")
     }
 }
 
