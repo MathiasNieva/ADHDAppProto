@@ -51,12 +51,6 @@ fun ComprehensiveTodoItem(
                     )
                 }
             }
-            todo.description?.let {
-                if (todo.description != "") {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = it)
-                }
-            }
         }
 
         Column(
