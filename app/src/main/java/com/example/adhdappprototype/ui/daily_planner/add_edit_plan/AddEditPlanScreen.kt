@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.adhdappprototype.data.util.Priority
 import com.example.adhdappprototype.data.util.Tag
 import com.example.adhdappprototype.ui.add_edit_comprehensive_todo.AddEditComprehensiveTodoEvent
+import com.example.adhdappprototype.ui.daily_todo_list.add_edit_daily_todo.AddEditDailyTodoEvent
 import com.example.adhdappprototype.util.UiEvent
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
@@ -284,6 +285,19 @@ fun AddEditPlanScreen(
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = viewModel.ifThenPlan,
+                onValueChange = {
+                    viewModel.onEvent(AddEditPlanEvent.OnIfThenPlanChange(it))
+                },
+                placeholder = {
+                    Text(text = "IF-THEN plan")
+                },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = false,
+                maxLines = 5
+            )
         }
     }
 }
