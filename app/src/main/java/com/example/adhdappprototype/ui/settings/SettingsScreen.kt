@@ -95,22 +95,26 @@ fun SettingsScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-            Spacer(modifier = Modifier.height(20.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        viewModel.onEvent(SettingsEvent.OnSettingClick)
-                    }
-                    .border(1.dp, color = Color.DarkGray)
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+            Column(
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Set time to plan",
-                    fontSize = 15.sp
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            viewModel.onEvent(SettingsEvent.OnSettingClick)
+                        }
+                        .border(1.dp, color = Color.DarkGray)
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Set time to plan",
+                        fontSize = 20.sp
+                    )
+                }
             }
         }
     }
