@@ -36,7 +36,7 @@ fun DailyPlanItem(
                 val borderSize = 1.dp.toPx()
                 val x = size.width + borderSize / 2
                 drawLine(
-                    color = Color.Black,
+                    color = Color.DarkGray,
                     start = Offset(x, -29.dp.toPx()),
                     end = Offset(x, 52.dp.toPx()),
                     strokeWidth = borderSize

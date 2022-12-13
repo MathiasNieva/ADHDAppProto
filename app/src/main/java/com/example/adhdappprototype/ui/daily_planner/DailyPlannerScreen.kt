@@ -113,7 +113,7 @@ fun DailyPlannerScreen(
                             val borderSize = 1.dp.toPx()
                             val y = size.height + borderSize / 2
                             drawLine(
-                                color = Color.Black,
+                                color = Color.LightGray,
                                 start = Offset(0f, y),
                                 end = Offset(size.width, y),
                                 strokeWidth = borderSize
